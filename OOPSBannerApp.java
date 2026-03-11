@@ -1,30 +1,13 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OOPSBannerApp {
 
-    static class CharacterPattern {
-        char character;
-        String[] pattern;
-
-        CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
-
-        public char getCharacter() {
-            return character;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
-
     public static void main(String[] args) {
 
-        List<CharacterPattern> patterns = new ArrayList<>();
+        Map<Character, String[]> patternMap = new HashMap<>();
 
-        patterns.add(new CharacterPattern('O', new String[]{
+        patternMap.put('O', new String[]{
                 "*****",
                 "*   *",
                 "*   *",
@@ -32,9 +15,9 @@ public class OOPSBannerApp {
                 "*   *",
                 "*   *",
                 "*****"
-        }));
+        });
 
-        patterns.add(new CharacterPattern('P', new String[]{
+        patternMap.put('P', new String[]{
                 "*****",
                 "*   *",
                 "*   *",
@@ -42,9 +25,9 @@ public class OOPSBannerApp {
                 "*",
                 "*",
                 "*"
-        }));
+        });
 
-        patterns.add(new CharacterPattern('S', new String[]{
+        patternMap.put('S', new String[]{
                 "*****",
                 "*",
                 "*",
@@ -52,7 +35,7 @@ public class OOPSBannerApp {
                 "    *",
                 "    *",
                 "*****"
-        }));
+        });
 
         String word = "OOPS";
 
@@ -62,12 +45,10 @@ public class OOPSBannerApp {
 
             for (char c : word.toCharArray()) {
 
-                for (CharacterPattern cp : patterns) {
+                String[] pattern = patternMap.get(c);
 
-                    if (cp.getCharacter() == c) {
-                        line.append(cp.getPattern()[row]).append("   ");
-                    }
-
+                if (pattern != null) {
+                    line.append(pattern[row]).append("   ");
                 }
 
             }

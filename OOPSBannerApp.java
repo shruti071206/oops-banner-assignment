@@ -1,24 +1,30 @@
+import java.util.*;
+
 public class OOPSBannerApp {
 
-    public static void main(String[] args) {
+    static class CharacterPattern {
+        char character;
+        String[] pattern;
 
-        String[] banner = {
-            String.join("   ", getO()[0], getO()[0], getP()[0], getS()[0]),
-            String.join("   ", getO()[1], getO()[1], getP()[1], getS()[1]),
-            String.join("   ", getO()[2], getO()[2], getP()[2], getS()[2]),
-            String.join("   ", getO()[3], getO()[3], getP()[3], getS()[3]),
-            String.join("   ", getO()[4], getO()[4], getP()[4], getS()[4]),
-            String.join("   ", getO()[5], getO()[5], getP()[5], getS()[5]),
-            String.join("   ", getO()[6], getO()[6], getP()[6], getS()[6])
-        };
+        CharacterPattern(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
 
-        for (String line : banner) {
-            System.out.println(line);
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
         }
     }
 
-    static String[] getO() {
-        return new String[]{
+    public static void main(String[] args) {
+
+        List<CharacterPattern> patterns = new ArrayList<>();
+
+        patterns.add(new CharacterPattern('O', new String[]{
                 "*****",
                 "*   *",
                 "*   *",
@@ -26,11 +32,9 @@ public class OOPSBannerApp {
                 "*   *",
                 "*   *",
                 "*****"
-        };
-    }
+        }));
 
-    static String[] getP() {
-        return new String[]{
+        patterns.add(new CharacterPattern('P', new String[]{
                 "*****",
                 "*   *",
                 "*   *",
@@ -38,11 +42,9 @@ public class OOPSBannerApp {
                 "*",
                 "*",
                 "*"
-        };
-    }
+        }));
 
-    static String[] getS() {
-        return new String[]{
+        patterns.add(new CharacterPattern('S', new String[]{
                 "*****",
                 "*",
                 "*",
@@ -50,6 +52,27 @@ public class OOPSBannerApp {
                 "    *",
                 "    *",
                 "*****"
-        };
+        }));
+
+        String word = "OOPS";
+
+        for (int row = 0; row < 7; row++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (char c : word.toCharArray()) {
+
+                for (CharacterPattern cp : patterns) {
+
+                    if (cp.getCharacter() == c) {
+                        line.append(cp.getPattern()[row]).append("   ");
+                    }
+
+                }
+
+            }
+
+            System.out.println(line.toString());
+        }
     }
 }
